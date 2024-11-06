@@ -16,6 +16,7 @@ use App\Http\Controllers\admin\IndexController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/download/{path}', [\App\Http\Controllers\DownloadController::class, 'index'])->where('path', '.*');
 
 $admin = config('admin.admin_alias_name');
 
