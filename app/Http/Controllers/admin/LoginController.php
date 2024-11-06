@@ -14,7 +14,7 @@ use Webman\Captcha\PhraseBuilder;
 
 class LoginController extends BaseController
 {
-    public function initialize():void
+    public function initialize(): void
     {
         parent::initialize();
         if (\request()->method() == 'GET' && !empty(session('admin')) && $this->action != 'out') {
@@ -33,11 +33,11 @@ class LoginController extends BaseController
                 return $this->error('captcha code is wrong');
             }
         }
-        $post      = \request()->post();
-        $rules     = [
-            'username'   => 'required',
-            'password'   => 'required',
-         ];
+        $post = \request()->post();
+        $rules = [
+            'username' => 'required',
+            'password' => 'required',
+        ];
         $validator = Validator::make($post, $rules, [
             'username' => 'username must be not empty',
             'password' => 'password must be not empty',
@@ -52,7 +52,7 @@ class LoginController extends BaseController
         if ($admin->status == 0) {
             return $this->error('the account is disabled');
         }
-        $admin->login_num   += 1;
+        $admin->login_num += 1;
         $admin->update_time = time();
         $admin->save();
         $admin = $admin->toArray();
@@ -64,9 +64,9 @@ class LoginController extends BaseController
 
     public function captcha(): Response
     {
-        $length  = 4;
-        $chars   = '0123456789';
-        $phrase  = new PhraseBuilder($length, $chars);
+        $length = 4;
+        $chars = '0123456789';
+        $phrase = new PhraseBuilder($length, $chars);
         $builder = new CaptchaBuilder(null, $phrase);
         $builder->build();
         session()->put('captcha', strtolower($builder->getPhrase()));

@@ -136,11 +136,11 @@
     </div>
     <h1>{{strip_tags($msg)}}</h1>
     <p class="jump">
-        页面将在 <span id="wait">{{$wait}}</span> 秒后自动跳转
+        Page will jump after <span id="wait">{{$wait}}</span> seconds
     </p>
     <p class="clearfix">
         <a href="#" onClick="javascript :history.back(-1);" class="btn btn-grey">返回上一页</a>
-        <a id="href" href="{{$url}}" class="btn btn-primary">立即跳转</a>
+        <a id="href" href="{{$url}}" class="btn btn-primary">Jump Now</a>
     </p>
 </div>
 <script type="text/javascript">

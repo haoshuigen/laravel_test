@@ -31,7 +31,7 @@ class BaseModel extends Model
     {
         parent::__construct($attributes);
         $calledClass = get_called_class();
-        $className   = substr(strrchr($calledClass, '\\'), 1);
+        $className = substr(strrchr($calledClass, '\\'), 1);
         $this->table = $this->getTableName($className);
     }
 

@@ -15,9 +15,9 @@ INSERT INTO `test_system_admin` (`id`, `auth_ids`, `head_img`, `username`, `pass
 -- 转存表中的数据 `test_system_menu`
 --
 INSERT INTO `test_system_menu` (`id`, `pid`, `title`, `icon`, `href`, `params`, `target`, `sort`, `status`, `remark`, `create_time`, `update_time`, `delete_time`) VALUES
-(1, 99999999, '后台首页', 'fa fa-home', 'index/welcome', '', '_self', 0, 1, '', 1730877078, 1730877078, NULL),
-(2, 0, '系统管理', 'fa fa-cog', '', '', '_self', 0, 1, '', 1730877078, 1730877078, NULL),
-(3, 2, '数据管理', 'fa fa fa-shower', 'system.dev/index', '', '_self', 0, 1, '', 1730877078, 1730877078, NULL);
+(1, 99999999, 'Home', 'fa fa-home', 'index/welcome', '', '_self', 0, 1, '', 1730877078, 1730877078, NULL),
+(2, 0, 'System Admin', 'fa fa-cog', '', '', '_self', 0, 1, '', 1730877078, 1730877078, NULL),
+(3, 2, 'Data Admin', 'fa fa fa-shower', 'system.dev/index', '', '_self', 0, 1, '', 1730877078, 1730877078, NULL);
 
 
 --
@@ -34,5 +34,5 @@ INSERT INTO `test_system_auth` (`id`, `title`, `sort`, `status`, `remark`, `crea
 --
 
 INSERT INTO `test_system_node` (`id`, `node`, `title`, `type`, `is_auth`, `create_time`, `update_time`) VALUES
-(1, 'system.dev', '数据管理', 1, 1, 1730877078, 1730877078),
-(2, 'system.dev/index', 'SQL查询', 2, 1, 1730877078, 1730877078);
+(1, 'system.dev', 'Data Admin', 1, 1, 1730877078, 1730877078),
+(2, 'system.dev/index', 'SQL Execution', 2, 1, 1730877078, 1730877078);

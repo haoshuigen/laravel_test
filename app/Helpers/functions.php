@@ -1,6 +1,6 @@
 <?php
 
-const HOME_PID       = 99999999;
+const HOME_PID = 99999999;
 const SUPER_ADMIN_ID = 1;
 
 /**
@@ -11,7 +11,7 @@ const SUPER_ADMIN_ID = 1;
  */
 function __url(string $url = '', array $vars = [], bool $suffix = false): string
 {
-    $url  = config('admin')['admin_alias_name'] . (str_starts_with($url, '/') ? $url : "/{$url}");
+    $url = config('admin')['admin_alias_name'] . (str_starts_with($url, '/') ? $url : "/{$url}");
     $_url = url($url, $vars, $suffix);
     return explode(request()->schemeAndHttpHost(), $_url)[1] ?? '/' . $url;
 

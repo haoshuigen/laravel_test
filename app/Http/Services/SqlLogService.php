@@ -19,7 +19,7 @@ class SqlLogService
      * @param string $sql
      * @return void
      */
-    public static function record(Exception|null $e, string $sql): void
+    public static function record(Exception|null $e, string $sql, float $usedTime = 0): void
     {
         $connectionType = config('database.default');
         $databaseUser = config('database.connections.' . $connectionType . '.username');
@@ -31,7 +31,7 @@ class SqlLogService
         SqlLog::create([
             'user' => $databaseUser,
             'sql' => !is_null($e) && method_exists($e, 'getSql') ? $e->getSql() : $sql,
-            'time' => 0,
+            'time' => $usedTime,
             'error' => !is_null($e) ? $e->getMessage() : '',
             'create_time' => time()
         ]);

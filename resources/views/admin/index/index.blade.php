@@ -9,7 +9,7 @@
             <div class="layui-logo layuimini-logo"></div>
             <div class="layuimini-header-content">
                 <a>
-                    <div class="layuimini-tool"><i title="展开" class="fa fa-outdent" data-side-fold="1"></i></div>
+                    <div class="layuimini-tool"><i title="Expand" class="fa fa-outdent" data-side-fold="1"></i></div>
                 </a>
 
                 <!--电脑端头部菜单-->
@@ -19,7 +19,7 @@
                 <!--手机端头部菜单-->
                 <ul class="layui-nav layui-layout-left layuimini-header-menu layuimini-mobile-show">
                     <li class="layui-nav-item">
-                        <a href="javascript:;"><i class="fa fa-list-ul"></i> 选择模块</a>
+                        <a href="javascript:;"><i class="fa fa-list-ul"></i> Select Module</a>
                         <dl class="layui-nav-child layuimini-menu-header-mobile">
                         </dl>
                     </li>
@@ -37,12 +37,12 @@
                         </a>
                         <dl class="layui-nav-child">
                             <dd>
-                                <a href="javascript:;" class="login-out">退出登录</a>
+                                <a href="javascript:;" class="login-out">Logout</a>
                             </dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item layuimini-select-bgcolor" lay-unselect>
-                        <a href="javascript:;" data-bgcolor="配色方案"><i class="fa fa-ellipsis-v"></i></a>
+                        <a href="javascript:;" data-bgcolor="Color Style"><i class="fa fa-ellipsis-v"></i></a>
                     </li>
                 </ul>
             </div>

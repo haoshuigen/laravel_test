@@ -51,8 +51,8 @@ define(["jquery", "ea-admin"], function ($, ea) {
                             cols: [_cols],
                             data: _data,
                             page: true,
-                            limit: 1,
-                            limits: [1, 2, 5, 10]
+                            limit: 10,
+                            limits: [5, 10, 20, 30]
                         });
                     }, function (res) {
                         $("#currentTable").hide();

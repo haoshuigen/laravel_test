@@ -26,11 +26,11 @@ trait JumpTrait
         }
         if (empty($url)) $url = __url();
         $result = [
-            'code'      => 1,
-            'msg'       => $msg,
-            'data'      => $data,
-            'url'       => $url,
-            'wait'      => $wait,
+            'code' => 1,
+            'msg' => $msg,
+            'data' => $data,
+            'url' => $url,
+            'wait' => $wait,
             '__token__' => csrf_token(),
         ];
         if ($this->getResponseType() == "html") return view('admin.success', $result);
@@ -52,11 +52,11 @@ trait JumpTrait
             $url = (strpos($url, '://') || str_starts_with($url, '/')) ? $url : "";
         }
         $result = [
-            'code'      => 0,
-            'msg'       => $msg,
-            'data'      => $data,
-            'url'       => $url,
-            'wait'      => $wait,
+            'code' => 0,
+            'msg' => $msg,
+            'data' => $data,
+            'url' => $url,
+            'wait' => $wait,
             '__token__' => csrf_token(),
         ];
         if ($this->getResponseType() == "html") return view('admin.error', $result);
@@ -78,11 +78,11 @@ trait JumpTrait
             $url = (strpos($url, '://') || str_starts_with($url, '/')) ? $url : "";
         }
         $result = [
-            'code'      => 0,
-            'msg'       => $msg,
-            'data'      => $data,
-            'url'       => $url,
-            'wait'      => $wait,
+            'code' => 0,
+            'msg' => $msg,
+            'data' => $data,
+            'url' => $url,
+            'wait' => $wait,
             '__token__' => csrf_token(),
         ];
         if ($this->getResponseType() == "html") return response()->view('admin.error', $result);
