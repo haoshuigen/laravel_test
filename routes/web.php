@@ -1,6 +1,10 @@
 <?php
 
+use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
+use App\Http\Middleware\CheckAuth;
+use App\Http\Controllers\admin\IndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 $admin = config('admin.admin_alias_name');
 
-Route::middleware([\App\Http\Middleware\CheckAuth::class])->group(function () use ($admin) {
+Route::middleware([CheckAuth::class])->group(function () use ($admin) {
     Route::prefix($admin)->group(function () {
 
         // Admin index route
-        Route::get('/', [\App\Http\Controllers\admin\IndexController::class, 'index']);
+        Route::get('/', [IndexController::class, 'index']);
 
         $adminNamespace = config('admin.controller_namespace');
         // Dynamic route (match secondary/controller.action)
@@ -32,17 +36,22 @@ Route::middleware([\App\Http\Middleware\CheckAuth::class])->group(function () us
                 $obj = new $className();
                 if (method_exists($obj, $action)) {
                     $reflectionClass = new ReflectionClass($className);
-                    $actionMethod    = $reflectionClass->getMethod($action);
-                    $args            = [];
+                    $actionMethod = $reflectionClass->getMethod($action);
+                    $args = [];
                     foreach ($actionMethod->getParameters() as $items) {
                         try {
                             if ($items->hasType()) {
-                                $type   = $items->getType()->getName();
+                                $type = $items->getType()->getName();
                                 $args[] = str_contains($type, 'App\\') ? new $type() : Container::getInstance()->make($type);
-                            }else {
+                            } else {
                                 $args[] = request($items->getName(), '');
                             }
-                        }catch (Throwable $exception) {
+                        } catch (Throwable $exception) {
+                            json([
+                                'code' => 0,
+                                'msg' => $exception->getMessage(),
+                                'error' => 'system error'
+                            ]);
                         }
                     }
                     return call_user_func([$obj, $action], ...$args);
@@ -55,22 +64,27 @@ Route::middleware([\App\Http\Middleware\CheckAuth::class])->group(function () us
         Route::match(['get', 'post'], '/{controller}/', function ($controller) use ($adminNamespace) {
             $namespace = $adminNamespace;
             $className = $namespace . ucfirst($controller . "Controller");
-            $action    = 'index';
+            $action = 'index';
             if (class_exists($className)) {
                 $obj = new $className();
                 if (method_exists($obj, $action)) {
                     $reflectionClass = new ReflectionClass($className);
-                    $actionMethod    = $reflectionClass->getMethod($action);
-                    $args            = [];
+                    $actionMethod = $reflectionClass->getMethod($action);
+                    $args = [];
                     foreach ($actionMethod->getParameters() as $items) {
                         try {
                             if ($items->hasType()) {
-                                $type   = $items->getType()->getName();
+                                $type = $items->getType()->getName();
                                 $args[] = str_contains($type, 'App\\') ? new $type() : Container::getInstance()->make($type);
-                            }else {
+                            } else {
                                 $args[] = request($items->getName(), '');
                             }
-                        }catch (Throwable $exception) {
+                        } catch (Throwable $exception) {
+                            json([
+                                'code' => 0,
+                                'msg' => $exception->getMessage(),
+                                'error' => 'system error'
+                            ]);
                         }
                     }
                     return call_user_func([$obj, $action], ...$args);
@@ -87,17 +101,22 @@ Route::middleware([\App\Http\Middleware\CheckAuth::class])->group(function () us
                 $obj = new $className();
                 if (method_exists($obj, $action)) {
                     $reflectionClass = new ReflectionClass($className);
-                    $actionMethod    = $reflectionClass->getMethod($action);
-                    $args            = [];
+                    $actionMethod = $reflectionClass->getMethod($action);
+                    $args = [];
                     foreach ($actionMethod->getParameters() as $items) {
                         try {
                             if ($items->hasType()) {
-                                $type   = $items->getType()->getName();
+                                $type = $items->getType()->getName();
                                 $args[] = str_contains($type, 'App\\') ? new $type() : Container::getInstance()->make($type);
-                            }else {
+                            } else {
                                 $args[] = request($items->getName(), '');
                             }
-                        }catch (Throwable $exception) {
+                        } catch (Throwable $exception) {
+                            json([
+                                'code' => 0,
+                                'msg' => $exception->getMessage(),
+                                'error' => 'system error'
+                            ]);
                         }
                     }
                     return call_user_func([$obj, $action], ...$args);
