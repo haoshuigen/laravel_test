@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use App\Http\Middleware\CheckAuth;
 use App\Http\Controllers\admin\IndexController;
+use App\Http\Controllers\DownloadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,7 @@ use App\Http\Controllers\admin\IndexController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/download/{path}', [\App\Http\Controllers\DownloadController::class, 'index'])->where('path', '.*');
+Route::get('/download/{path}', [DownloadController::class, 'index'])->where('path', '.*');
 
 $admin = config('admin.admin_alias_name');
 
