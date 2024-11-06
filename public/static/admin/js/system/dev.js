@@ -2,9 +2,9 @@ define(["jquery", "ea-admin"], function ($, ea) {
     return {
         index: function () {
             layui.use('form', function () {
-                var form = layui.form;
-                var table = layui.table;
-                var csrfToken = "";
+                let form = layui.form;
+                let table = layui.table;
+                let csrfToken = "";
                 form.verify({
                     content: function (value) {
                         const regex = /^\s*SELECT\s+.*$/i;
@@ -33,7 +33,29 @@ define(["jquery", "ea-admin"], function ($, ea) {
                         let _data = res.data;
                         let _cols = res.cols;
                         csrfToken = res.token;
+
+                        // download a export file without open new page
+                        if (dataType === 'json' || dataType === 'excel') {
+                            let $a = $('<a>', {
+                                href: ea.exportPath + "/" + _data,
+                                style: 'display: none;'
+                            }).appendTo('body');
+                            $a[0].click();
+                            return;
+                        }
+
+                        // render search result
+                        $("#currentTable").show();
+                        table.render({
+                            elem: '#currentTable',
+                            cols: [_cols],
+                            data: _data,
+                            page: true,
+                            limit: 1,
+                            limits: [1, 2, 5, 10]
+                        });
                     }, function (res) {
+                        $("#currentTable").hide();
                         ea.msg.error(res.msg);
                         csrfToken = res.token;
                         return false;
